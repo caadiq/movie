@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Movie</string>
+
+    <!--menu_bottom_navigation_view.xml-->
+    <string name="str_bottom_nav_home">홈</string>
+    <string name="str_bottom_nav_search">검색</string>
+    <string name="str_bottom_nav_bookmark">북마크</string>
 </resources>
