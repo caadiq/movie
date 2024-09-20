@@ -64,8 +64,8 @@ dependencies {
     // androidx
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swipeRefreshLayout)
 
     // google
     implementation(libs.material)
@@ -78,4 +78,5 @@ dependencies {
     // 기타
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.glide)
 }
