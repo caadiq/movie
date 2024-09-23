@@ -5,6 +5,10 @@
         android:icon="@drawable/icon_home"
         android:title="@string/str_bottom_nav_home" />
     <item
+        android:id="@+id/chart"
+        android:icon="@drawable/icon_chart"
+        android:title="@string/str_bottom_nav_chart" />
+    <item
         android:id="@+id/search"
         android:icon="@drawable/icon_search"
         android:title="@string/str_bottom_nav_search" />
