@@ -21,6 +21,7 @@ hiltX = "1.2.0"
 
 retrofit = "2.11.0"
 glide = "4.16.0"
+dotsIndicator = "5.0"
 
 
 [libraries]
@@ -47,6 +48,7 @@ hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+dotsIndicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
 
 
 [plugins]
