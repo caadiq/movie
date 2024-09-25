@@ -25,6 +25,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_shadow"
+                app:layout_constraintDimensionRatio="H, 8:2"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager"
+                app:layout_constraintStart_toStartOf="@+id/viewPager" />
+
             <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
                 android:id="@+id/dots_indicator"
                 android:layout_width="wrap_content"
@@ -39,6 +48,89 @@
                 app:layout_constraintBottom_toBottomOf="@+id/viewPager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReleaseRecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nanum_square_round_bold"
+                android:text="@string/str_home_release_recent"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReleaseRecentAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/nanum_square_round_regular"
+                android:padding="4dp"
+                android:text="@string/str_home_see_all"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtReleaseRecent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtReleaseRecent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRecent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseRecent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReleaseComing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:fontFamily="@font/nanum_square_round_bold"
+                android:text="@string/str_home_release_coming"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerRecent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtReleaseComingAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/nanum_square_round_regular"
+                android:padding="4dp"
+                android:text="@string/str_home_see_all"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtReleaseComing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtReleaseComing" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerComing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseComing" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
