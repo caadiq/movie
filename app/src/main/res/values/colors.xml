@@ -26,5 +26,7 @@
     <color name="dark_gray">#616161</color>
     <color name="darker_gray">#212121</color>
     <color name="lavender_gray">#9998AD</color>
+    <color name="navy">#211F39</color>
     <color name="deep_navy">#070420</color>
+    <color name="light_navy">#37364B</color>
 </resources>

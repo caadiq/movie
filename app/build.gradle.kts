@@ -69,6 +69,7 @@ dependencies {
 
     // google
     implementation(libs.material)
+    implementation(libs.flexbox)
 
     // hilt
     implementation(libs.hilt.android)

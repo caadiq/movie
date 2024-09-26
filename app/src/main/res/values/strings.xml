@@ -6,6 +6,12 @@
     <string name="str_home_release_coming">개봉 예정</string>
     <string name="str_home_see_all">모두 보기</string>
 
+    <!--fragment_search.xml-->
+    <string name="str_search_hint">영화 제목 또는 장르로 검색</string>
+
+    <!--row_search_history.xml-->
+    <string name="str_search_recent">최근 검색</string>
+
     <!--menu_bottom_navigation_view.xml-->
     <string name="str_bottom_nav_home">홈</string>
     <string name="str_bottom_nav_chart">순위</string>
