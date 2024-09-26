@@ -11,6 +11,7 @@
 
     <!--row_search_history.xml-->
     <string name="str_search_recent">최근 검색</string>
+    <string name="str_search_delete_all">모두 지우기</string>
 
     <!--menu_bottom_navigation_view.xml-->
     <string name="str_bottom_nav_home">홈</string>

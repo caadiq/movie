@@ -59,13 +59,28 @@
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:orientation="horizontal"
+        android:overScrollMode="never"
         android:paddingStart="24dp"
         android:paddingEnd="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRecent"
-        tools:listitem="@layout/row_search_history"
-        tools:itemCount="4"/>
+        tools:itemCount="4"
+        tools:listitem="@layout/row_search_history" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDeleteAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_round_bold"
+        android:padding="8dp"
+        android:text="@string/str_search_delete_all"
+        android:textColor="@color/crimson_red"
+        android:textSize="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
