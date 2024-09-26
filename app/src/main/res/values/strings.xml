@@ -2,8 +2,8 @@
     <string name="app_name">Movie</string>
 
     <!--fragment_home.xml-->
-    <string name="str_home_release_recent">최근 개봉 영화</string>
-    <string name="str_home_release_coming">개봉 예정 영화</string>
+    <string name="str_home_release_recent">최근 개봉</string>
+    <string name="str_home_release_coming">개봉 예정</string>
     <string name="str_home_see_all">모두 보기</string>
 
     <!--menu_bottom_navigation_view.xml-->

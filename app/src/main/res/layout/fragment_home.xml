@@ -1,66 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@color/deep_navy">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="H, 4:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/gradient_shadow"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                    app:layout_constraintDimensionRatio="H, 8:2"
+                    app:layout_constraintEnd_toEndOf="@+id/viewPager"
+                    app:layout_constraintStart_toStartOf="@+id/viewPager" />
+
+                <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                    android:id="@+id/dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:dotsColor="@color/crimson_red"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="4dp"
+                    app:dotsStrokeColor="@color/crimson_red"
+                    app:dotsStrokeWidth="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_collapseMode="parallax" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="H, 4:3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/gradient_shadow"
-                app:layout_constraintDimensionRatio="H, 8:2"
-                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-                app:layout_constraintEnd_toEndOf="@+id/viewPager"
-                app:layout_constraintStart_toStartOf="@+id/viewPager" />
-
-            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-                android:id="@+id/dots_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:dotsColor="@color/crimson_red"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="16dp"
-                app:dotsSpacing="4dp"
-                app:dotsStrokeColor="@color/crimson_red"
-                app:dotsStrokeWidth="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtReleaseRecent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/nanum_square_round_bold"
                 android:text="@string/str_home_release_recent"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtReleaseRecentAll"
@@ -68,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/nanum_square_round_regular"
-                android:padding="4dp"
+                android:paddingVertical="4dp"
                 android:text="@string/str_home_see_all"
                 android:textColor="@color/white"
                 android:textSize="14dp"
@@ -82,13 +111,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 android:paddingStart="24dp"
                 android:paddingEnd="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtReleaseRecent" />
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseRecent"
+                tools:listitem="@layout/row_home_movie_release" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtReleaseComing"
@@ -109,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/nanum_square_round_regular"
-                android:padding="4dp"
+                android:paddingVertical="4dp"
                 android:text="@string/str_home_see_all"
                 android:textColor="@color/white"
                 android:textSize="14dp"
@@ -122,18 +153,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="40dp"
                 android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
-                android:paddingHorizontal="24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtReleaseComing" />
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseComing"
+                tools:listitem="@layout/row_home_movie_release" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

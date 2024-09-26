@@ -21,4 +21,9 @@
     <style name="Style.BottomNavigationView.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>
     </style>
+
+    <style name="RoundedShapeAppearanceOverlay.4dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
 </resources>

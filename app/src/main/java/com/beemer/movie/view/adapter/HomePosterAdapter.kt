@@ -10,14 +10,10 @@ import com.beemer.movie.databinding.RowHomePosterBinding
 import com.beemer.movie.view.diff.StringListDiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
     private var itemList = mutableListOf<String>()
@@ -39,7 +35,8 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
             Glide.with(binding.root)
                 .load(item)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(RequestOptions().transform(MultiTransformation(CenterCrop(), BlurTransformation(10))))
+                .centerCrop()
+//                .apply(RequestOptions().transform(MultiTransformation(CenterCrop(), BlurTransformation(10))))
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                         binding.progressIndicator.visibility = View.GONE
