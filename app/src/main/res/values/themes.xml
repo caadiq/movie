@@ -26,4 +26,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">4dp</item>
     </style>
+
+    <style name="RoundedShapeAppearanceOverlay.20dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>

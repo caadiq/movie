@@ -28,5 +28,7 @@
     <color name="lavender_gray">#9998AD</color>
     <color name="navy">#211F39</color>
     <color name="deep_navy">#070420</color>
+    <color name="deep_navy_transcluent">#F0070420</color>
     <color name="light_navy">#37364B</color>
+    <color name="lighter_navy">#8E88A1</color>
 </resources>

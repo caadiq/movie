@@ -9,9 +9,16 @@
     <!--fragment_search.xml-->
     <string name="str_search_hint">영화 제목 또는 장르로 검색</string>
 
+    <!--fragment_bookmark.xml-->
+    <string name="str_bookmark_title">북마크</string>
+    <string name="str_bookmark_delete_all">모두 삭제</string>
+
     <!--row_search_history.xml-->
     <string name="str_search_recent">최근 검색</string>
     <string name="str_search_delete_all">모두 지우기</string>
+
+    <!--row_bookmark_list.xml-->
+    <string name="str_bookmark_details">상세 정보</string>
 
     <!--menu_bottom_navigation_view.xml-->
     <string name="str_bottom_nav_home">홈</string>
