@@ -56,7 +56,13 @@ class SearchFragment : Fragment() {
         }
 
         binding.txtDeleteAll.setOnClickListener {
-            searchHistoryViewModel.deleteAllHistory()
+            DefaultDialog(
+                title = null,
+                message = "검색 기록을 삭제하시겠습니까?",
+                onConfirm = {
+                    searchHistoryViewModel.deleteAllHistory()
+                }
+            ).show(childFragmentManager, "DefaultDialog")
         }
     }
 

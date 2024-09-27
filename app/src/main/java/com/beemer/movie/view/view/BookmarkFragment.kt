@@ -25,6 +25,7 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupView()
         setupRecyclerView()
     }
 
@@ -46,6 +47,18 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
                 }
             }
         ).show(childFragmentManager, "MenuBottomSheetDialog")
+    }
+
+    private fun setupView() {
+        binding.btnDeleteAll.setOnClickListener {
+            DefaultDialog(
+                title = null,
+                message = "모든 북마크를 삭제하시겠습니까?",
+                onConfirm = {
+
+                }
+            ).show(childFragmentManager, "DefaultDialog")
+        }
     }
 
     private fun setupRecyclerView() {
