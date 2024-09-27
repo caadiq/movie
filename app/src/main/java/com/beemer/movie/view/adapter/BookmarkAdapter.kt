@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.beemer.movie.databinding.RowBookmarkListBinding
+import com.beemer.movie.databinding.RowBookmarkBinding
 import com.beemer.movie.model.dto.BookmarkListDto
 import com.beemer.movie.view.diff.BookmarkListDiffUtil
 import com.bumptech.glide.Glide
@@ -27,7 +27,7 @@ class BookmarkAdapter(private val listener: OnViewClickListener) : RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = RowBookmarkListBinding.inflate(inflater, parent, false)
+        val binding = RowBookmarkBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
@@ -35,7 +35,7 @@ class BookmarkAdapter(private val listener: OnViewClickListener) : RecyclerView.
         holder.bind(itemList[position])
     }
 
-    inner class ViewHolder(private val binding: RowBookmarkListBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: RowBookmarkBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BookmarkListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)

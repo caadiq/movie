@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.beemer.movie.R
 import com.beemer.movie.databinding.FragmentBookmarkBinding
 import com.beemer.movie.model.dto.BookmarkListDto
+import com.beemer.movie.model.dto.BottomsheetMenuListDto
 import com.beemer.movie.view.adapter.BookmarkAdapter
 
 class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
@@ -32,7 +34,18 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
     }
 
     override fun setOnViewClick(item: BookmarkListDto) {
-
+        MenuBottomSheetDialog(
+            list = listOf(
+                BottomsheetMenuListDto(R.drawable.icon_bookmark, "북마크에서 삭제")
+            ),
+            onItemClick = { menu, _ ->
+                when (menu.text) {
+                    "북마크에서 삭제" -> {
+                        // TODO: 북마크에서 삭제
+                    }
+                }
+            }
+        ).show(childFragmentManager, "MenuBottomSheetDialog")
     }
 
     private fun setupRecyclerView() {
