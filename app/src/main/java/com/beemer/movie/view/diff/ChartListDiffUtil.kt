@@ -13,7 +13,14 @@ class ChartListDiffUtil(private val oldList: List<ChartItem>, private val newLis
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition]::class == newList[newItemPosition]::class
+        val oldItem = oldList[oldItemPosition]
+        val newItem = newList[newItemPosition]
+
+        return if (oldItem is ChartItem.Chart && newItem is ChartItem.Chart) {
+            oldItem.chartListDto.movieCode == newItem.chartListDto.movieCode
+        } else {
+            oldItem::class == newItem::class
+        }
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
