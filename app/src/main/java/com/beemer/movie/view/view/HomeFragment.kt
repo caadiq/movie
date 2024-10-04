@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.beemer.movie.databinding.FragmentHomeBinding
 import com.beemer.movie.model.dto.MovieReleaseListDto
 import com.beemer.movie.view.adapter.HomePosterAdapter
@@ -13,6 +16,7 @@ import com.beemer.movie.view.adapter.MovieReleaseAdapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -66,6 +70,16 @@ class HomeFragment : Fragment() {
 
             offscreenPageLimit = 5
             isUserInputEnabled = false
+
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+            val transform = CompositePageTransformer()
+            transform.addTransformer(MarginPageTransformer(16))
+            transform.addTransformer { page, position ->
+                val r = 1 - abs(position)
+                page.scaleY = 0.8f + r * 0.2f
+            }
+            setPageTransformer(transform)
         }
 
         binding.dotsIndicator.apply {

@@ -35,7 +35,7 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
             Glide.with(binding.root)
                 .load(item)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .centerCrop()
+//                .centerCrop()
 //                .apply(RequestOptions().transform(MultiTransformation(CenterCrop(), BlurTransformation(10))))
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {

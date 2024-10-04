@@ -12,11 +12,18 @@ enum class MainFragmentType(val tag: String) {
     SEARCH("search"),
     BOOKMARK("bookmark")
 }
+enum class ChartTabType(val tag: String) {
+    DAILY("daily"),
+    WEEKLY("weekly")
+}
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
     private val _currentFragmentType = MutableLiveData(MainFragmentType.HOME)
     val currentFragmentType: LiveData<MainFragmentType> = _currentFragmentType
+
+    private val _currentChartTabType = MutableLiveData(ChartTabType.DAILY)
+    val currentChartTabType: LiveData<ChartTabType> = _currentChartTabType
 
     fun setCurrentFragment(item: Int): Boolean {
         val pageType = getPageType(item)
@@ -40,5 +47,27 @@ class MainViewModel @Inject constructor() : ViewModel() {
             return
 
         _currentFragmentType.value = fragmentType
+    }
+
+    fun setCurrentChartTab(item: Int): Boolean {
+        val tabType = getTabType(item)
+        changeCurrentChartTabType(tabType)
+
+        return true
+    }
+
+    private fun getTabType(item: Int): ChartTabType {
+        return when (item) {
+            0 -> ChartTabType.DAILY
+            1 -> ChartTabType.WEEKLY
+            else -> ChartTabType.DAILY
+        }
+    }
+
+    private fun changeCurrentChartTabType(tabType: ChartTabType) {
+        if (currentChartTabType.value == tabType)
+            return
+
+        _currentChartTabType.value = tabType
     }
 }
