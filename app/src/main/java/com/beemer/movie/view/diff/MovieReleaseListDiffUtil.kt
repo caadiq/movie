@@ -1,9 +1,9 @@
 package com.beemer.movie.view.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.beemer.movie.model.dto.MovieReleaseListDto
+import com.beemer.movie.model.dto.ReleaseListDto
 
-class MovieReleaseListDiffUtil(private val oldList: List<MovieReleaseListDto>, private val newList: List<MovieReleaseListDto>) : DiffUtil.Callback() {
+class MovieReleaseListDiffUtil(private val oldList: List<ReleaseListDto>, private val newList: List<ReleaseListDto>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }

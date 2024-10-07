@@ -66,6 +66,7 @@ class ChartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: ChartListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
+                .error(R.drawable.icon_no_image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .listener(object : RequestListener<Drawable> {

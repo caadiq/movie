@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.beemer.movie.R
 import com.beemer.movie.databinding.RowBookmarkBinding
 import com.beemer.movie.model.dto.BookmarkListDto
 import com.beemer.movie.view.diff.BookmarkListDiffUtil
@@ -39,6 +40,7 @@ class BookmarkAdapter(private val listener: OnViewClickListener) : RecyclerView.
         fun bind(item: BookmarkListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
+                .error(R.drawable.icon_no_image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .listener(object : RequestListener<Drawable> {

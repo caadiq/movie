@@ -6,18 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.beemer.movie.R
 import com.beemer.movie.databinding.RowHomeMovieReleaseBinding
-import com.beemer.movie.model.dto.MovieReleaseListDto
+import com.beemer.movie.model.dto.ReleaseListDto
 import com.beemer.movie.view.diff.MovieReleaseListDiffUtil
+import com.beemer.movie.view.utils.DateTimeConverter.convertDate
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import java.util.Locale
 
 class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>() {
-    private var itemList = mutableListOf<MovieReleaseListDto>()
+    private var itemList = mutableListOf<ReleaseListDto>()
 
     override fun getItemCount(): Int = itemList.size
 
@@ -32,9 +35,10 @@ class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>
     }
 
     inner class ViewHolder(private val binding: RowHomeMovieReleaseBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieReleaseListDto) {
+        fun bind(item: ReleaseListDto) {
             Glide.with(binding.root)
-                .load(item.poster)
+                .load(item.posterUrl)
+                .error(R.drawable.icon_no_image)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .listener(object : RequestListener<Drawable> {
@@ -50,12 +54,12 @@ class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>
                 })
                 .into(binding.imgPoster)
 
-            binding.txtTitle.text = item.title
-            binding.txtOpenDate.text = item.openDate
+            binding.txtTitle.text = item.movieName
+            binding.txtOpenDate.text = item.releaseDate?.let { convertDate(it, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA) }
         }
     }
 
-    fun setItemList(list: List<MovieReleaseListDto>) {
+    fun setItemList(list: List<ReleaseListDto>) {
         val diffCallBack = MovieReleaseListDiffUtil(itemList, list)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
 
