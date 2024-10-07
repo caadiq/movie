@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beemer.movie.databinding.RowHomePosterBinding
-import com.beemer.movie.view.diff.StringListDiffUtil
+import com.beemer.movie.model.dto.PosterBannerDto
+import com.beemer.movie.view.diff.PosterBannerDiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -16,7 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
 class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
-    private var itemList = mutableListOf<String>()
+    private var itemList = mutableListOf<PosterBannerDto>()
 
     override fun getItemCount(): Int = itemList.size
 
@@ -31,9 +32,9 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(private val binding: RowHomePosterBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
+        fun bind(item: PosterBannerDto) {
             Glide.with(binding.root)
-                .load(item)
+                .load(item.posterUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
 //                .centerCrop()
 //                .apply(RequestOptions().transform(MultiTransformation(CenterCrop(), BlurTransformation(10))))
@@ -52,8 +53,8 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
         }
     }
 
-    fun setItemList(list: List<String>) {
-        val diffCallBack = StringListDiffUtil(itemList, list)
+    fun setItemList(list: List<PosterBannerDto>) {
+        val diffCallBack = PosterBannerDiffUtil(itemList, list)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
 
         itemList.clear()
