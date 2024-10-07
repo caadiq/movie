@@ -10,9 +10,9 @@ class MovieRepository @Inject constructor(retrofit: Retrofit) {
 
     suspend fun getPosterBanner() = movieApi.getPosterBanner().awaitResponse().body() ?: emptyList()
 
-    suspend fun getDailyRankList(date: String) = movieApi.getDailyRankList(date).awaitResponse().body() ?: emptyList()
+    suspend fun getDailyRankList(date: String) = movieApi.getDailyRankList(date).awaitResponse().body()
 
-    suspend fun getWeeklyRankList(startDate: String, endDate: String) = movieApi.getWeeklyRankList(startDate, endDate).awaitResponse().body() ?: emptyList()
+    suspend fun getWeeklyRankList(startDate: String, endDate: String) = movieApi.getWeeklyRankList(startDate, endDate).awaitResponse().body()
 
     suspend fun getRecentReleaseList(limit: Int) = movieApi.getRecentReleaseList(limit).awaitResponse().body() ?: emptyList()
 

@@ -17,11 +17,11 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
     private val _posterBanner = MutableLiveData<List<PosterBannerDto>>()
     val posterBanner: LiveData<List<PosterBannerDto>> = _posterBanner
 
-    private val _dailyRankList = MutableLiveData<List<RankListDto>>()
-    val dailyRankList: LiveData<List<RankListDto>> = _dailyRankList
+    private val _dailyRankList = MutableLiveData<RankListDto>()
+    val dailyRankList: LiveData<RankListDto> = _dailyRankList
 
-    private val _weeklyRankList = MutableLiveData<List<RankListDto>>()
-    val weeklyRankList: LiveData<List<RankListDto>> = _weeklyRankList
+    private val _weeklyRankList = MutableLiveData<RankListDto>()
+    val weeklyRankList: LiveData<RankListDto> = _weeklyRankList
 
     private val _recentReleaseList = MutableLiveData<List<ReleaseListDto>>()
     val recentReleaseList: LiveData<List<ReleaseListDto>> = _recentReleaseList

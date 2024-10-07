@@ -25,6 +25,15 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _currentChartTabType = MutableLiveData(ChartTabType.DAILY)
     val currentChartTabType: LiveData<ChartTabType> = _currentChartTabType
 
+    private val _currentDate = MutableLiveData<String?>()
+    val currentDate: LiveData<String?> = _currentDate
+
+    private val _prevDate = MutableLiveData<String?>()
+    val prevDate: LiveData<String?> = _prevDate
+
+    private val _nextDate = MutableLiveData<String?>()
+    val nextDate: LiveData<String?> = _nextDate
+
     fun setCurrentFragment(item: Int): Boolean {
         val pageType = getPageType(item)
         changeCurrentFragmentType(pageType)
@@ -69,5 +78,17 @@ class MainViewModel @Inject constructor() : ViewModel() {
             return
 
         _currentChartTabType.value = tabType
+    }
+
+    fun setCurrentDate(date: String?) {
+        _currentDate.value = date
+    }
+
+    fun setPrevDate(date: String?) {
+        _prevDate.value = date
+    }
+
+    fun setNextDate(date: String?) {
+        _nextDate.value = date
     }
 }

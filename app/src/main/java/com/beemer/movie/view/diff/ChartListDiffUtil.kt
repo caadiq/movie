@@ -1,9 +1,9 @@
 package com.beemer.movie.view.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.beemer.movie.view.adapter.ChartItem
+import com.beemer.movie.model.dto.ChartListDto
 
-class ChartListDiffUtil(private val oldList: List<ChartItem>, private val newList: List<ChartItem>) : DiffUtil.Callback() {
+class ChartListDiffUtil(private val oldList: List<ChartListDto>, private val newList: List<ChartListDto>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }
@@ -13,14 +13,7 @@ class ChartListDiffUtil(private val oldList: List<ChartItem>, private val newLis
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldItem = oldList[oldItemPosition]
-        val newItem = newList[newItemPosition]
-
-        return if (oldItem is ChartItem.Chart && newItem is ChartItem.Chart) {
-            oldItem.chartListDto.movieCode == newItem.chartListDto.movieCode
-        } else {
-            oldItem::class == newItem::class
-        }
+        return oldList[oldItemPosition].movieCode == newList[newItemPosition].movieCode
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

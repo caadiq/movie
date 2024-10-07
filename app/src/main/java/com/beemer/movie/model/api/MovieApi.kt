@@ -13,10 +13,10 @@ interface MovieApi {
     fun getPosterBanner(): Call<List<PosterBannerDto>>
 
     @GET("/api/movie/rank/daily")
-    fun getDailyRankList(@Query("date") date: String): Call<List<RankListDto>>
+    fun getDailyRankList(@Query("date") date: String): Call<RankListDto>
 
     @GET("/api/movie/rank/weekly")
-    fun getWeeklyRankList(@Query("startDate") startDate: String, @Query("endDate") endDate: String): Call<List<RankListDto>>
+    fun getWeeklyRankList(@Query("startDate") startDate: String, @Query("endDate") endDate: String): Call<RankListDto>
 
     @GET("/api/movie/release/recent")
     fun getRecentReleaseList(@Query("limit") limit: Int): Call<List<ReleaseListDto>>

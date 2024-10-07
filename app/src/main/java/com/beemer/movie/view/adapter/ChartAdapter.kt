@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beemer.movie.R
 import com.beemer.movie.databinding.RowChartBinding
-import com.beemer.movie.databinding.RowChartHeaderBinding
 import com.beemer.movie.model.dto.ChartListDto
 import com.beemer.movie.view.diff.ChartListDiffUtil
 import com.beemer.movie.view.utils.DateTimeConverter.convertDate
@@ -20,49 +19,22 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import java.util.Locale
 
-sealed class ChartItem {
-    data class Header(val text: String) : ChartItem()
-    data class Chart(val chartListDto: ChartListDto) : ChartItem()
-}
-
-class ChartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var itemList = mutableListOf<ChartItem>()
-
-    companion object {
-        private const val VIEW_TYPE_HEADER = 0
-        private const val VIEW_TYPE_CHART = 1
-    }
+class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
+    private var itemList = mutableListOf<ChartListDto>()
 
     override fun getItemCount(): Int = itemList.size
 
-    override fun getItemViewType(position: Int): Int = if (position == 0) VIEW_TYPE_HEADER else VIEW_TYPE_CHART
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-
-        return if (viewType == VIEW_TYPE_HEADER) {
-            val binding = RowChartHeaderBinding.inflate(inflater, parent, false)
-            HeaderViewHolder(binding)
-        } else {
-            val binding = RowChartBinding.inflate(inflater, parent, false)
-            ChartViewHolder(binding)
-        }
+        val binding = RowChartBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (val item = itemList[position]) {
-            is ChartItem.Header -> (holder as HeaderViewHolder).bind(item.text)
-            is ChartItem.Chart -> (holder as ChartViewHolder).bind(item.chartListDto)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(itemList[position])
     }
 
-    inner class HeaderViewHolder(private val binding: RowChartHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(text: String) {
-            binding.txtDate.text = text
-        }
-    }
-
-    inner class ChartViewHolder(private val binding: RowChartBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: RowChartBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ChartListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
@@ -108,7 +80,7 @@ class ChartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun setItemList(list: List<ChartItem>) {
+    fun setItemList(list: List<ChartListDto>) {
         val diffCallBack = ChartListDiffUtil(itemList, list)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
 
