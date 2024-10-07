@@ -91,6 +91,20 @@ class ChartFragment : Fragment() {
                 }
             }
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            currentDate?.let {
+                when (mainViewModel.currentChartTabType.value) {
+                    ChartTabType.DAILY -> movieViewModel.getDailyRankList(it)
+                    ChartTabType.WEEKLY -> {
+                        val startDate = LocalDate.parse(it, dateFormat)
+                        val endDate = startDate.plusDays(6).format(dateFormat)
+                        movieViewModel.getWeeklyRankList(it, endDate)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun setupTabLayout() {
@@ -172,6 +186,8 @@ class ChartFragment : Fragment() {
 
         movieViewModel.apply {
             dailyRankList.observe(viewLifecycleOwner) { dailyRankList ->
+                binding.swipeRefreshLayout.isRefreshing = false
+
                 binding.txtDate.text = convertDate(dailyRankList.date.currenetDate, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA)
 
                 chartAdapter.setItemList(dailyRankList.rankList.map {
@@ -195,6 +211,8 @@ class ChartFragment : Fragment() {
             }
 
             weeklyRankList.observe(viewLifecycleOwner) { weeklyRankList ->
+                binding.swipeRefreshLayout.isRefreshing = false
+
                 val startDate = LocalDate.parse(weeklyRankList.date.currenetDate, dateFormat)
                 val thursday = startDate.plusDays(3)
                 val month = thursday.monthValue
