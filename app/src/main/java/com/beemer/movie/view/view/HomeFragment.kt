@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -41,9 +42,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupView()
         setupRecyclerView()
         setupViewModel()
-        autoScrollJob = startAutoScroll()
     }
 
     override fun onDestroyView() {
@@ -58,6 +59,27 @@ class HomeFragment : Fragment() {
             autoScrollJob?.cancel()
         } else {
             autoScrollJob = startAutoScroll()
+        }
+    }
+
+    private fun startAutoScroll(): Job {
+        return lifecycleScope.launch {
+            while (true) {
+                delay(5000)
+                val itemCount = homePosterAdapter.itemCount
+                val currentItem = binding.viewPager.currentItem
+                val nextItem = if (currentItem == itemCount - 1) 0 else currentItem + 1
+                binding.viewPager.setCurrentItem(nextItem, true)
+            }
+        }
+    }
+
+    private fun setupView() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            autoScrollJob?.cancel()
+            movieViewModel.getPosterBanner()
+            movieViewModel.getRecentReleaseList(5)
+            movieViewModel.getComingReleaseList(5)
         }
     }
 
@@ -87,18 +109,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun startAutoScroll(): Job {
-        return lifecycleScope.launch {
-            while (true) {
-                delay(5000)
-                val itemCount = homePosterAdapter.itemCount
-                val currentItem = binding.viewPager.currentItem
-                val nextItem = if (currentItem == itemCount - 1) 0 else currentItem + 1
-                binding.viewPager.setCurrentItem(nextItem, true)
-            }
-        }
-    }
-
     private fun setupRecyclerView() {
         binding.recyclerRecent.apply {
             adapter = recenetMovieReleaseAdapter
@@ -114,6 +124,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewModel() {
+        val allRequestsCompleted = MediatorLiveData<Boolean>().apply {
+            var posterBannerLoaded = false
+            var recentReleaseListLoaded = false
+            var comingReleaseListLoaded = false
+
+            fun update() {
+                value = posterBannerLoaded && recentReleaseListLoaded && comingReleaseListLoaded
+            }
+
+            addSource(movieViewModel.posterBanner) {
+                posterBannerLoaded = true
+                update()
+            }
+
+            addSource(movieViewModel.recentReleaseList) {
+                recentReleaseListLoaded = true
+                update()
+            }
+
+            addSource(movieViewModel.comingReleaseList) {
+                comingReleaseListLoaded = true
+                update()
+            }
+        }
+
         movieViewModel.apply {
             getPosterBanner()
             getRecentReleaseList(5)
@@ -122,6 +157,7 @@ class HomeFragment : Fragment() {
             posterBanner.observe(viewLifecycleOwner) { list ->
                 homePosterAdapter.setItemList(list)
                 setupViewPager()
+                autoScrollJob = startAutoScroll()
             }
 
             recentReleaseList.observe(viewLifecycleOwner) { list ->
@@ -130,6 +166,12 @@ class HomeFragment : Fragment() {
 
             comingReleaseList.observe(viewLifecycleOwner) { list ->
                 comingMovieReleaseAdapter.setItemList(list)
+            }
+
+            allRequestsCompleted.observe(viewLifecycleOwner) { completed ->
+                if (completed) {
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
             }
         }
     }
