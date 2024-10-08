@@ -31,4 +31,10 @@
     <color name="deep_navy_transcluent">#F0070420</color>
     <color name="light_navy">#37364B</color>
     <color name="lighter_navy">#8E88A1</color>
+
+    <color name="grade_all">#00964B</color>
+    <color name="grade_12">#EABC00</color>
+    <color name="grade_15">#DC7317</color>
+    <color name="grade_18">#D92C35</color>
+    <color name="grade_19">#D92C35</color>
 </resources>

@@ -3,6 +3,7 @@ package com.beemer.movie.model.api
 import com.beemer.movie.model.dto.PosterBannerDto
 import com.beemer.movie.model.dto.RankListDto
 import com.beemer.movie.model.dto.ReleaseListDto
+import com.beemer.movie.model.dto.SearchListDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -23,4 +24,7 @@ interface MovieApi {
 
     @GET("/api/movie/release/coming")
     fun getComingReleaseList(@Query("limit") limit: Int): Call<List<ReleaseListDto>>
+
+    @GET("/api/movie/search")
+    fun getSearchList(@Query("page") page: Int?, @Query("limit") limit: Int?, @Query("query") query: String): Call<SearchListDto>
 }

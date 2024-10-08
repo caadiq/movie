@@ -17,4 +17,6 @@ class MovieRepository @Inject constructor(retrofit: Retrofit) {
     suspend fun getRecentReleaseList(limit: Int) = movieApi.getRecentReleaseList(limit).awaitResponse().body() ?: emptyList()
 
     suspend fun getComingReleaseList(limit: Int) = movieApi.getComingReleaseList(limit).awaitResponse().body() ?: emptyList()
+
+    suspend fun getSearchList(page: Int?, limit: Int?, query: String) = movieApi.getSearchList(page, limit, query).awaitResponse().body()
 }

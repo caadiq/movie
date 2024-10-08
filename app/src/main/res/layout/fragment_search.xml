@@ -5,82 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputSearch"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSearch"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        app:endIconMode="clear_text"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editSearch"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/rectangle_lightnavy_rounded_28dp_ripple"
-            android:drawableStart="@drawable/icon_search"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/white"
-            android:fontFamily="@font/nanum_square_round_bold"
-            android:gravity="center_vertical"
-            android:hint="@string/str_search_hint"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingHorizontal="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/lavender_gray"
-            android:textSize="16dp"
-            tools:text="" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtRecent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:background="@drawable/rectangle_lightnavy_rounded_28dp_ripple"
+        android:drawablePadding="16dp"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/nanum_square_round_bold"
-        android:text="@string/str_search_recent"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSearch" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:clipToPadding="false"
-        android:nestedScrollingEnabled="false"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        android:paddingStart="24dp"
-        android:paddingEnd="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRecent"
-        tools:itemCount="4"
-        tools:listitem="@layout/row_search_history" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtDeleteAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_square_round_bold"
-        android:padding="8dp"
-        android:text="@string/str_search_delete_all"
-        android:textColor="@color/crimson_red"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp"
+        android:text="@string/str_search_hint"
+        android:textColor="@color/lavender_gray"
         android:textSize="16dp"
-        android:visibility="gone"
+        app:drawableStartCompat="@drawable/icon_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSearch">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_search" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtEmptyList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_neo_bold"
+        android:text="@string/str_search_empty_list"
+        android:textColor="@color/lighter_navy"
+        android:textSize="18dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="@+id/swipeRefreshLayout"
+        app:layout_constraintStart_toStartOf="@+id/swipeRefreshLayout"
+        app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

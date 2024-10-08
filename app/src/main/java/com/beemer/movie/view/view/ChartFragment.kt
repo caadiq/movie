@@ -188,7 +188,7 @@ class ChartFragment : Fragment() {
             dailyRankList.observe(viewLifecycleOwner) { dailyRankList ->
                 binding.swipeRefreshLayout.isRefreshing = false
 
-                binding.txtDate.text = convertDate(dailyRankList.date.currenetDate, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA)
+                binding.txtDate.text = convertDate(dailyRankList.date.currenetDate, "yyyy-MM-dd", "MM.dd (E)", Locale.KOREA)
 
                 chartAdapter.setItemList(dailyRankList.rankList.map {
                     ChartListDto(

@@ -12,6 +12,7 @@
 
     <!--fragment_search.xml-->
     <string name="str_search_hint">영화 제목 또는 장르로 검색</string>
+    <string name="str_search_empty_list">검색 결과가 없습니다.</string>
 
     <!--fragment_bookmark.xml-->
     <string name="str_bookmark_title">북마크</string>
