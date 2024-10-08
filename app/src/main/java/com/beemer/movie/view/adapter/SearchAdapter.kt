@@ -81,27 +81,33 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .into(binding.imgPoster)
 
             binding.txtGrade.apply {
-                text = when (item.grade) {
-                    "전체관람가" -> "ALL"
-                    "12세이상관람가" -> "12"
-                    "15세이상관람가" -> "15"
-                    "18세이상관람가" -> "18"
-                    "청소년관람불가" -> "19"
-                    "연소자관람가" -> "ALL"
-                    "연소자관람불가" -> "19"
+                text = when {
+                    item.grade?.contains("전체") == true -> "ALL"
+                    item.grade?.contains("국민학생") == true -> "12"
+                    item.grade?.contains("중학생") == true -> "12"
+                    item.grade?.contains("12세") == true -> "12"
+                    item.grade?.contains("15세") == true -> "15"
+                    item.grade?.contains("18세") == true -> "19"
+                    item.grade?.contains("청소년") == true -> "19"
+                    item.grade?.contains("연소자관람가") == true -> "ALL"
+                    item.grade?.contains("연소자관람불가") == true -> "19"
+                    item.grade?.contains("연소자불가") == true -> "19"
                     else -> item.grade
                 }
-                backgroundTintList = when (item.grade) {
-                    "전체관람가" -> ColorStateList.valueOf(context.getColor(R.color.grade_all))
-                    "12세이상관람가" -> context.getColorStateList(R.color.grade_12)
-                    "15세이상관람가" -> context.getColorStateList(R.color.grade_15)
-                    "18세이상관람가" -> context.getColorStateList(R.color.grade_18)
-                    "청소년관람불가" -> context.getColorStateList(R.color.grade_19)
-                    "연소자관람가" -> context.getColorStateList(R.color.grade_all)
-                    "연소자관람불가" -> context.getColorStateList(R.color.grade_19)
+                backgroundTintList = when {
+                    item.grade?.contains("전체") == true -> ColorStateList.valueOf(context.getColor(R.color.grade_all))
+                    item.grade?.contains("국민학생") == true -> ColorStateList.valueOf(context.getColor(R.color.grade_12))
+                    item.grade?.contains("중학생") == true -> context.getColorStateList(R.color.grade_12)
+                    item.grade?.contains("12세") == true -> context.getColorStateList(R.color.grade_12)
+                    item.grade?.contains("15세") == true -> context.getColorStateList(R.color.grade_15)
+                    item.grade?.contains("18세") == true -> context.getColorStateList(R.color.grade_18)
+                    item.grade?.contains("청소년") == true -> context.getColorStateList(R.color.grade_19)
+                    item.grade?.contains("연소자관람가") == true -> context.getColorStateList(R.color.grade_all)
+                    item.grade?.contains("연소자관람불가") == true -> context.getColorStateList(R.color.grade_19)
+                    item.grade?.contains("연소자불가") == true -> context.getColorStateList(R.color.grade_19)
                     else -> context.getColorStateList(R.color.grade_all)
                 }
-                visibility = if (item.grade == null) View.GONE else View.VISIBLE
+                visibility = if (item.grade.isNullOrEmpty()) View.GONE else View.VISIBLE
             }
             binding.txtTitle.text = item.movieName
             binding.txtGenre.text = item.genre
