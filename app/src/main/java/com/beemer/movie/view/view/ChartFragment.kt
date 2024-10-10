@@ -1,5 +1,6 @@
 package com.beemer.movie.view.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -129,6 +130,12 @@ class ChartFragment : Fragment() {
             adapter = chartAdapter
             setHasFixedSize(true)
             itemAnimator = null
+        }
+
+        chartAdapter.setOnItemClickListener { item, _ ->
+            val intent = Intent(requireContext(), DetailsActivity::class.java)
+            intent.putExtra("code", item.movieCode)
+            startActivity(intent)
         }
     }
 

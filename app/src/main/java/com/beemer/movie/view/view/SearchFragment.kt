@@ -73,6 +73,8 @@ class SearchFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             if (searchQuery.trim().isNotEmpty())
                 movieViewModel.getSearchList(0, 20, searchQuery, true)
+            else
+                binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -99,6 +101,12 @@ class SearchFragment : Fragment() {
                     }
                 }
             })
+        }
+
+        searchAdapter.setOnItemClickListener { item, _ ->
+            val intent = Intent(requireContext(), DetailsActivity::class.java)
+            intent.putExtra("code", item.movieCode)
+            startActivity(intent)
         }
     }
 

@@ -11,9 +11,15 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmark")
     fun getAllBookmark(): LiveData<List<BookmarkEntity>>
 
+    @Query("SELECT * FROM bookmark WHERE movieCode = :code LIMIT 1")
+    suspend fun getBookmarkByCode(code: String): BookmarkEntity?
+
     @Insert
     suspend fun insertBookmark(dto: BookmarkEntity)
 
     @Query("DELETE FROM bookmark")
     suspend fun deleteAllBookmark()
+
+    @Query("DELETE FROM bookmark WHERE movieCode = :code")
+    suspend fun deleteBookmarkByCode(code: String)
 }

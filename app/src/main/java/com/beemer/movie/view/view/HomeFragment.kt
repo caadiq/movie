@@ -1,5 +1,6 @@
 package com.beemer.movie.view.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,7 @@ class HomeFragment : Fragment() {
     private val movieViewModel by viewModels<MovieViewModel>()
 
     private val homePosterAdapter = HomePosterAdapter()
-    private val recenetMovieReleaseAdapter = MovieReleaseAdapter()
+    private val recentMovieReleaseAdapter = MovieReleaseAdapter()
     private val comingMovieReleaseAdapter = MovieReleaseAdapter()
 
     private var autoScrollJob: Job? = null
@@ -111,7 +112,7 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.recyclerRecent.apply {
-            adapter = recenetMovieReleaseAdapter
+            adapter = recentMovieReleaseAdapter
             itemAnimator = null
             setHasFixedSize(true)
         }
@@ -120,6 +121,18 @@ class HomeFragment : Fragment() {
             adapter = comingMovieReleaseAdapter
             itemAnimator = null
             setHasFixedSize(true)
+        }
+        
+        recentMovieReleaseAdapter.setOnItemClickListener { item, _ ->
+            val intent = Intent(requireContext(), DetailsActivity::class.java)
+            intent.putExtra("code", item.movieCode)
+            startActivity(intent)
+        }
+
+        comingMovieReleaseAdapter.setOnItemClickListener { item, _ ->
+            val intent = Intent(requireContext(), DetailsActivity::class.java)
+            intent.putExtra("code", item.movieCode)
+            startActivity(intent)
         }
     }
 
@@ -161,7 +174,7 @@ class HomeFragment : Fragment() {
             }
 
             recentReleaseList.observe(viewLifecycleOwner) { list ->
-                recenetMovieReleaseAdapter.setItemList(list)
+                recentMovieReleaseAdapter.setItemList(list)
             }
 
             comingReleaseList.observe(viewLifecycleOwner) { list ->

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.beemer.movie.model.dto.MovieDetailsDto
 import com.beemer.movie.model.dto.PageDto
 import com.beemer.movie.model.dto.PosterBannerDto
 import com.beemer.movie.model.dto.RankListDto
@@ -42,6 +43,9 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
 
     private val _isRefreshed = MutableLiveData<Boolean>()
     val isRefreshed: LiveData<Boolean> = _isRefreshed
+
+    private val _details = MutableLiveData<MovieDetailsDto>()
+    val details: LiveData<MovieDetailsDto> = _details
 
     fun getPosterBanner() {
         viewModelScope.launch {
@@ -92,5 +96,11 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
 
     fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
+    }
+
+    fun getMovieDetails(code: String) {
+        viewModelScope.launch {
+            _details.value = repository.getMovieDetails(code)
+        }
     }
 }

@@ -21,6 +21,7 @@ import java.util.Locale
 
 class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>() {
     private var itemList = mutableListOf<ReleaseListDto>()
+    private var onItemClickListener: ((ReleaseListDto, Int) -> Unit)? = null
 
     override fun getItemCount(): Int = itemList.size
 
@@ -35,6 +36,15 @@ class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>
     }
 
     inner class ViewHolder(private val binding: RowHomeMovieReleaseBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.invoke(itemList[position], position)
+                }
+            }
+        }
+
         fun bind(item: ReleaseListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
@@ -57,6 +67,10 @@ class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>
             binding.txtTitle.text = item.movieName
             binding.txtOpenDate.text = item.releaseDate?.let { convertDate(it, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA) }
         }
+    }
+
+    fun setOnItemClickListener(listener: (ReleaseListDto, Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun setItemList(list: List<ReleaseListDto>) {

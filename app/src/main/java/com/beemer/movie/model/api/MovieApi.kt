@@ -1,5 +1,6 @@
 package com.beemer.movie.model.api
 
+import com.beemer.movie.model.dto.MovieDetailsDto
 import com.beemer.movie.model.dto.PosterBannerDto
 import com.beemer.movie.model.dto.RankListDto
 import com.beemer.movie.model.dto.ReleaseListDto
@@ -27,4 +28,7 @@ interface MovieApi {
 
     @GET("/api/movie/search")
     fun getSearchList(@Query("page") page: Int?, @Query("limit") limit: Int?, @Query("query") query: String): Call<SearchListDto>
+
+    @GET("/api/movie/details")
+    fun getMovieDetails(@Query("code") code: String): Call<MovieDetailsDto>
 }

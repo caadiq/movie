@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Movie</string>
 
+    <!--activity_details.xml-->
+    <string name="str_details_runtime">러닝타임</string>
+    <string name="str_details_nation">국가</string>
+    <string name="str_details_grade">등급</string>
+    <string name="str_details_plot">영화 소개</string>
+
     <!--fragment_home.xml-->
     <string name="str_home_release_recent">최근 개봉</string>
     <string name="str_home_release_coming">개봉 예정</string>

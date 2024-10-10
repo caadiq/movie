@@ -21,6 +21,7 @@ import java.util.Locale
 
 class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
     private var itemList = mutableListOf<ChartListDto>()
+    private var onItemClickListener: ((ChartListDto, Int) -> Unit)? = null
 
     override fun getItemCount(): Int = itemList.size
 
@@ -35,6 +36,15 @@ class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(private val binding: RowChartBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.invoke(itemList[position], position)
+                }
+            }
+        }
+
         fun bind(item: ChartListDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
@@ -78,6 +88,10 @@ class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
                 }
             }
         }
+    }
+
+    fun setOnItemClickListener(listener: (ChartListDto, Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun setItemList(list: List<ChartListDto>) {

@@ -92,6 +92,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     item.grade?.contains("연소자관람가") == true -> "ALL"
                     item.grade?.contains("연소자관람불가") == true -> "19"
                     item.grade?.contains("연소자불가") == true -> "19"
+                    item.grade?.contains("모든") == true -> "ALL"
                     else -> item.grade
                 }
                 backgroundTintList = when {
@@ -105,6 +106,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     item.grade?.contains("연소자관람가") == true -> context.getColorStateList(R.color.grade_all)
                     item.grade?.contains("연소자관람불가") == true -> context.getColorStateList(R.color.grade_19)
                     item.grade?.contains("연소자불가") == true -> context.getColorStateList(R.color.grade_19)
+                    item.grade?.contains("모든") == true -> context.getColorStateList(R.color.grade_all)
                     else -> context.getColorStateList(R.color.grade_all)
                 }
                 visibility = if (item.grade.isNullOrEmpty()) View.GONE else View.VISIBLE

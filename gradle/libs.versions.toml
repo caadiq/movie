@@ -25,6 +25,8 @@ retrofit = "2.11.0"
 glide = "4.16.0"
 glideTransformations = "4.3.0"
 dotsIndicator = "5.0"
+lottie = "5.2.0"
+readMore = "1.0.0"
 
 
 [libraries]
@@ -57,6 +59,8 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-transformations = { group = "jp.wasabeef", name = "glide-transformations", version.ref = "glideTransformations" }
 dotsIndicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+readMore = { group = "kr.co.prnd", name = "readmore-textview", version.ref = "readMore" }
 
 
 [plugins]

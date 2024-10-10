@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.beemer.movie.databinding.DialogDefaultBinding
 
-class DefaultDialog(private val title: String?, private val message: String, private val onConfirm: () -> Unit) : DialogFragment() {
+class DefaultDialog(
+    private val title: String?,
+    private val message: String,
+    private val onConfirm: () -> Unit,
+    private val onCancel: (() -> Unit)? = null
+) : DialogFragment() {
     private var _binding: DialogDefaultBinding? = null
     private val binding get() = _binding!!
 
@@ -51,6 +56,11 @@ class DefaultDialog(private val title: String?, private val message: String, pri
 
         binding.txtConrifm.setOnClickListener {
             onConfirm()
+            dismiss()
+        }
+
+        binding.txtCancel.setOnClickListener {
+            onCancel?.invoke()
             dismiss()
         }
     }

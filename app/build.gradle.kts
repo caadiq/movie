@@ -85,4 +85,6 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.glide.transformations)
     implementation(libs.dotsIndicator)
+    implementation(libs.lottie)
+    implementation(libs.readMore)
 }

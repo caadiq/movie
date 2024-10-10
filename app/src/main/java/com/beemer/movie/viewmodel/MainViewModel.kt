@@ -34,6 +34,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _nextDate = MutableLiveData<String?>()
     val nextDate: LiveData<String?> = _nextDate
 
+    private val _isBookmarked = MutableLiveData<Boolean>()
+    val isBookmarked: LiveData<Boolean> = _isBookmarked
+
     fun setCurrentFragment(item: Int): Boolean {
         val pageType = getPageType(item)
         changeCurrentFragmentType(pageType)
@@ -90,5 +93,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     fun setNextDate(date: String?) {
         _nextDate.value = date
+    }
+
+    fun setIsBookmarked(isBookmarked: Boolean) {
+        _isBookmarked.value = isBookmarked
     }
 }
