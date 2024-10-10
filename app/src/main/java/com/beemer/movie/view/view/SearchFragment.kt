@@ -35,6 +35,8 @@ class SearchFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK) {
             val query = result.data?.getStringExtra("query")
             query?.let {
+                searchAdapter.setItemList(emptyList())
+
                 searchQuery = it
                 movieViewModel.getSearchList(0, 20, it, true)
                 binding.txtSearch.apply {

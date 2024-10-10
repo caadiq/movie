@@ -8,7 +8,7 @@ import com.beemer.movie.model.entity.BookmarkEntity
 
 @Dao
 interface BookmarkDao {
-    @Query("SELECT * FROM bookmark")
+    @Query("SELECT * FROM bookmark ORDER BY id DESC")
     fun getAllBookmark(): LiveData<List<BookmarkEntity>>
 
     @Query("SELECT * FROM bookmark WHERE movieCode = :code LIMIT 1")

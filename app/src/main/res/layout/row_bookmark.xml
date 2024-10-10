@@ -87,6 +87,7 @@
             tools:text="액션, 범죄" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDetails"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:background="@drawable/rectangle_crimsonred_rounded_18dp_ripple"

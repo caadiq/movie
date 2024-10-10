@@ -1,19 +1,27 @@
 package com.beemer.movie.view.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.beemer.movie.R
 import com.beemer.movie.databinding.FragmentBookmarkBinding
 import com.beemer.movie.model.dto.BookmarkListDto
 import com.beemer.movie.model.dto.BottomsheetMenuListDto
 import com.beemer.movie.view.adapter.BookmarkAdapter
+import com.beemer.movie.viewmodel.BookmarkViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
+@AndroidEntryPoint
+class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, BookmarkAdapter.OnDetailsClickListener {
     private var _binding: FragmentBookmarkBinding? = null
     private val binding get() = _binding!!
+
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
     private lateinit var bookmarkAdapter : BookmarkAdapter
 
@@ -27,6 +35,7 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
 
         setupView()
         setupRecyclerView()
+        setupViewModel()
     }
 
     override fun onDestroyView() {
@@ -34,19 +43,31 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
         _binding = null
     }
 
-    override fun setOnViewClick(item: BookmarkListDto) {
+    override fun setOnMenuClick(item: BookmarkListDto) {
         MenuBottomSheetDialog(
             list = listOf(
                 BottomsheetMenuListDto(R.drawable.icon_bookmark, "북마크에서 삭제")
             ),
-            onItemClick = { menu, _ ->
-                when (menu.text) {
-                    "북마크에서 삭제" -> {
-                        // TODO: 북마크에서 삭제
+            onItemClick = { _, position ->
+                when (position) {
+                    0 -> {
+                        DefaultDialog(
+                            title = null,
+                            message = "북마크에서 삭제하시겠습니까?",
+                            onConfirm = {
+                                bookmarkViewModel.deleteBookmarkByCode(item.movieCode)
+                            }
+                        ).show(childFragmentManager, "DeleteBookmarkDialog")
                     }
                 }
             }
         ).show(childFragmentManager, "MenuBottomSheetDialog")
+    }
+
+    override fun setOnDetailsClick(item: BookmarkListDto) {
+        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        intent.putExtra("code", item.movieCode)
+        startActivity(intent)
     }
 
     private fun setupView() {
@@ -55,28 +76,48 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnViewClickListener {
                 title = null,
                 message = "모든 북마크를 삭제하시겠습니까?",
                 onConfirm = {
-
+                    bookmarkViewModel.deleteAllBookmark()
                 }
-            ).show(childFragmentManager, "DefaultDialog")
+            ).show(childFragmentManager, "DeleteAllBookmarkDialog")
         }
     }
 
     private fun setupRecyclerView() {
-        bookmarkAdapter = BookmarkAdapter(this)
-
-        bookmarkAdapter.setItemList(listOf(
-            BookmarkListDto("20239670", "베테랑2", "http://file.koreafilm.or.kr/thm/02/99/18/54/tn_DPK022660.jpg", "액션, 범죄"),
-            BookmarkListDto("20249733", "사랑의 하츄핑", "http://file.koreafilm.or.kr/thm/02/99/18/48/tn_DPK022363.jpg", "애니메이션"),
-            BookmarkListDto("20242495", "브레드이발소: 빵스타의 탄생", "http://file.koreafilm.or.kr/thm/02/99/18/54/tn_DPK022665.jpg", "애니메이션"),
-            BookmarkListDto("20149629", "비긴 어게인", "http://file.koreafilm.or.kr/thm/02/00/02/90/tn_DPF007914.JPG", "멜로/로맨스"),
-            BookmarkListDto("20243721", "정국: 아이 엠 스틸", "http://file.koreafilm.or.kr/thm/02/99/18/54/tn_DPA002033.jpg", "공연")
-        ))
+        bookmarkAdapter = BookmarkAdapter(this, this)
 
         binding.recyclerView.apply {
             adapter = bookmarkAdapter
             setHasFixedSize(true)
         }
-        
-        binding.btnDeleteAll.visibility = View.VISIBLE // 임시
+    }
+
+    private fun setupViewModel() {
+        bookmarkViewModel.apply {
+            bookmark.observe(viewLifecycleOwner) { list ->
+                binding.btnDeleteAll.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+                binding.txtEmptyList.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+
+                bookmarkAdapter.setItemList(list.map {
+                    BookmarkListDto(
+                        movieCode = it.movieCode,
+                        movieName = it.movieName,
+                        posterUrl = it.posterUrl,
+                        genre = it.movieGenre
+                    )
+                })
+            }
+
+            deleteResult.observe(viewLifecycleOwner) { result ->
+                if (result) {
+                    Toast.makeText(requireContext(), "북마크가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            deleteAllResult.observe(viewLifecycleOwner) { result ->
+                if (result) {
+                    Toast.makeText(requireContext(), "모든 북마크가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

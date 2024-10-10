@@ -17,9 +17,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
-class BookmarkAdapter(private val listener: OnViewClickListener) : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
-    interface OnViewClickListener {
-        fun setOnViewClick(item: BookmarkListDto)
+class BookmarkAdapter(private val listenerMenu: OnMenuClickListener, private val listenerDetails: OnDetailsClickListener) : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
+    interface OnMenuClickListener {
+        fun setOnMenuClick(item: BookmarkListDto)
+    }
+
+    interface OnDetailsClickListener {
+        fun setOnDetailsClick(item: BookmarkListDto)
     }
 
     private var itemList = mutableListOf<BookmarkListDto>()
@@ -60,7 +64,11 @@ class BookmarkAdapter(private val listener: OnViewClickListener) : RecyclerView.
             binding.txtGenre.text = item.genre
 
             binding.imgMenu.setOnClickListener {
-                listener.setOnViewClick(item)
+                listenerMenu.setOnMenuClick(item)
+            }
+
+            binding.btnDetails.setOnClickListener {
+                listenerDetails.setOnDetailsClick(item)
             }
         }
     }

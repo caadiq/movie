@@ -30,7 +30,7 @@ class DetailsActivity : AppCompatActivity() {
     private val movieCode by lazy { intent.getStringExtra("code") }
 
     private var isBookmarked = false
-    private var bookmark = BookmarkEntity("", "", "", "")
+    private var bookmark = BookmarkEntity(movieCode = "", movieName = "", posterUrl = "", movieGenre = "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

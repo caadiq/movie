@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.Target
 
 class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
     private var itemList = mutableListOf<PosterBannerDto>()
+    private var onItemClickListener: ((PosterBannerDto, Int) -> Unit)? = null
 
     override fun getItemCount(): Int = itemList.size
 
@@ -32,12 +33,19 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(private val binding: RowHomePosterBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.invoke(itemList[position], position)
+                }
+            }
+        }
+
         fun bind(item: PosterBannerDto) {
             Glide.with(binding.root)
                 .load(item.posterUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-//                .centerCrop()
-//                .apply(RequestOptions().transform(MultiTransformation(CenterCrop(), BlurTransformation(10))))
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                         binding.progressIndicator.visibility = View.GONE
@@ -51,6 +59,10 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
                 })
                 .into(binding.imgPoster)
         }
+    }
+
+    fun setOnItemClickListener(listener: (PosterBannerDto, Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun setItemList(list: List<PosterBannerDto>) {

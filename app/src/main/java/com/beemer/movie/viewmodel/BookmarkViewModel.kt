@@ -23,6 +23,8 @@ class BookmarkViewModel @Inject constructor(private val repository: BookmarkRepo
     private val _deleteResult = MutableLiveData<Boolean>()
     val deleteResult: LiveData<Boolean> get() = _deleteResult
 
+    private val _deleteAllResult = MutableLiveData<Boolean>()
+    val deleteAllResult: LiveData<Boolean> get() = _deleteAllResult
 
     fun checkBookmarkExists(movieCode: String) {
         viewModelScope.launch {
@@ -41,12 +43,6 @@ class BookmarkViewModel @Inject constructor(private val repository: BookmarkRepo
         }
     }
 
-    fun deleteAllBookmark() {
-        viewModelScope.launch {
-            repository.deleteAllBookmark()
-        }
-    }
-
     fun deleteBookmarkByCode(movieCode: String) {
         viewModelScope.launch {
             try {
@@ -54,6 +50,17 @@ class BookmarkViewModel @Inject constructor(private val repository: BookmarkRepo
                 _deleteResult.value = true
             } catch (e: Exception) {
                 _deleteResult.value = false
+            }
+        }
+    }
+
+    fun deleteAllBookmark() {
+        viewModelScope.launch {
+            try {
+                repository.deleteAllBookmark()
+                _deleteAllResult.value = true
+            } catch (e: Exception) {
+                _deleteAllResult.value = false
             }
         }
     }

@@ -36,9 +36,7 @@ class MenuBottomSheetDialog(private val list: List<BottomsheetMenuListDto>, priv
             setItemList(list)
 
             setOnItemClickListener { item, position ->
-                if (position != 0)
-                    onItemClick(item, position)
-
+                onItemClick(item, position)
                 dismiss()
             }
         }

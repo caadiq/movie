@@ -108,6 +108,12 @@ class HomeFragment : Fragment() {
             dotsClickable = false
             attachTo(binding.viewPager)
         }
+
+        homePosterAdapter.setOnItemClickListener { item, _ ->
+            val intent = Intent(requireContext(), DetailsActivity::class.java)
+            intent.putExtra("code", item.movieCode)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {

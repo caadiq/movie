@@ -23,6 +23,7 @@
     <!--fragment_bookmark.xml-->
     <string name="str_bookmark_title">북마크</string>
     <string name="str_bookmark_delete_all">모두 삭제</string>
+    <string name="str_bookmark_empty_list">추가한 북마크가 없습니다.</string>
 
     <!--row_search_history.xml-->
     <string name="str_search_recent">최근 검색</string>
