@@ -38,7 +38,7 @@ class MovieReleaseAdapter : RecyclerView.Adapter<MovieReleaseAdapter.ViewHolder>
     inner class ViewHolder(private val binding: RowHomeMovieReleaseBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClickListener?.invoke(itemList[position], position)
                 }

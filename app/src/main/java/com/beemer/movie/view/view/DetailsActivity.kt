@@ -1,7 +1,6 @@
 package com.beemer.movie.view.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -100,7 +99,6 @@ class DetailsActivity : AppCompatActivity() {
         mainViewModel.apply {
             isBookmarked.observe(this@DetailsActivity) { isBookmarked ->
                 this@DetailsActivity.isBookmarked = isBookmarked
-                Log.d("테스트", "북마크 여부: $isBookmarked")
             }
         }
 

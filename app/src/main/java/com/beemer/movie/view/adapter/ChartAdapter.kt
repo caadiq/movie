@@ -38,7 +38,7 @@ class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: RowChartBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClickListener?.invoke(itemList[position], position)
                 }

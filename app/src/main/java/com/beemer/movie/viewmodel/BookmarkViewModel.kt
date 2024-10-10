@@ -4,15 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.beemer.movie.model.entity.BookmarkEntity
 import com.beemer.movie.model.repository.BookmarkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(private val repository: BookmarkRepository) : ViewModel() {
-    val bookmark: LiveData<List<BookmarkEntity>> = repository.getAllBookmark()
+    val bookmark: Flow<PagingData<BookmarkEntity>> = repository.getAllBookmark().cachedIn(viewModelScope)
 
     private val _isBookmarkExists = MutableLiveData<Boolean>()
     val isBookmarkExists: LiveData<Boolean> get() = _isBookmarkExists

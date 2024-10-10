@@ -35,7 +35,7 @@ class HomePosterAdapter : RecyclerView.Adapter<HomePosterAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: RowHomePosterBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClickListener?.invoke(itemList[position], position)
                 }

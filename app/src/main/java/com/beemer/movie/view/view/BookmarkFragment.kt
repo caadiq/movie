@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.map
 import com.beemer.movie.R
 import com.beemer.movie.databinding.FragmentBookmarkBinding
 import com.beemer.movie.model.dto.BookmarkListDto
@@ -15,6 +17,8 @@ import com.beemer.movie.model.dto.BottomsheetMenuListDto
 import com.beemer.movie.view.adapter.BookmarkAdapter
 import com.beemer.movie.viewmodel.BookmarkViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, BookmarkAdapter.OnDetailsClickListener {
@@ -92,12 +96,9 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, Bookma
     }
 
     private fun setupViewModel() {
-        bookmarkViewModel.apply {
-            bookmark.observe(viewLifecycleOwner) { list ->
-                binding.btnDeleteAll.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
-                binding.txtEmptyList.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-
-                bookmarkAdapter.setItemList(list.map {
+        viewLifecycleOwner.lifecycleScope.launch {
+            bookmarkViewModel.bookmark.collectLatest { pagingData ->
+                bookmarkAdapter.submitData(pagingData.map {
                     BookmarkListDto(
                         movieCode = it.movieCode,
                         movieName = it.movieName,
@@ -106,7 +107,9 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, Bookma
                     )
                 })
             }
+        }
 
+        bookmarkViewModel.apply {
             deleteResult.observe(viewLifecycleOwner) { result ->
                 if (result) {
                     Toast.makeText(requireContext(), "북마크가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
