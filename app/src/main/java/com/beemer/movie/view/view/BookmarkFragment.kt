@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.map
 import com.beemer.movie.R
 import com.beemer.movie.databinding.FragmentBookmarkBinding
@@ -92,6 +93,14 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, Bookma
         binding.recyclerView.apply {
             adapter = bookmarkAdapter
             setHasFixedSize(true)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            bookmarkAdapter.loadStateFlow.collect {
+                if (it.append is LoadState.NotLoading) {
+                    binding.btnDeleteAll.visibility = if (bookmarkAdapter.itemCount > 0) View.VISIBLE else View.GONE
+                    binding.txtEmptyList.visibility = if (bookmarkAdapter.itemCount == 0) View.VISIBLE else View.GONE
+                }
+            }
         }
     }
 

@@ -89,4 +89,7 @@ dependencies {
     implementation(libs.dotsIndicator)
     implementation(libs.lottie)
     implementation(libs.readMore)
+    implementation(libs.williamchart)
+    implementation(libs.williamchart.tooltip.slider)
+    implementation(libs.williamchart.tooltip.points)
 }

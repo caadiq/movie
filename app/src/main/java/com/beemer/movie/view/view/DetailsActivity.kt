@@ -108,43 +108,76 @@ class DetailsActivity : AppCompatActivity() {
             details.observe(this@DetailsActivity) { details ->
                 bookmark = BookmarkEntity(
                     movieCode = movieCode ?: "",
-                    movieName = details.movieName,
-                    posterUrl = details.posterUrl ?: "",
-                    movieGenre = details.genres.joinToString(", ") { it }
+                    movieName = details.details.movieName,
+                    posterUrl = details.details.posterUrl ?: "",
+                    movieGenre = details.details.genres.joinToString(", ") { it }
                 )
 
-                binding.txtTitle.text = details.movieName
-                binding.txtOpenDate.text = details.openDate?.let { convertDate(it, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA) }
-                binding.txtRunTime.text = details.runTime?.let { "${it}분" } ?: "알 수 없음"
-                binding.txtNation.text = details.nation ?: "알 수 없음"
+                binding.txtTitle.text = details.details.movieName
+                binding.txtOpenDate.text = details.details.openDate?.let { convertDate(it, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA) }
+                binding.txtRunTime.text = details.details.runTime?.let { "${it}분" } ?: "알 수 없음"
+                binding.txtNation.text = details.details.nation ?: "알 수 없음"
                 binding.txtGrade.text = when {
-                    details.grade?.contains("전체") == true -> "전체"
-                    details.grade?.contains("국민학생") == true -> "12세 이상"
-                    details.grade?.contains("중학생") == true -> "12세 이상"
-                    details.grade?.contains("12세") == true -> "12세 이상"
-                    details.grade?.contains("15세") == true -> "15세 이상"
-                    details.grade?.contains("18세") == true -> "19세 이상"
-                    details.grade?.contains("청소년") == true -> "19세 이상"
-                    details.grade?.contains("연소자관람가") == true -> "전체"
-                    details.grade?.contains("연소자관람불가") == true -> "19세 이상"
-                    details.grade?.contains("연소자불가") == true -> "19세 이상"
-                    details.grade?.contains("모든") == true -> "전체"
-                    else -> details.grade
+                    details.details.grade?.contains("전체") == true -> "전체"
+                    details.details.grade?.contains("국민학생") == true -> "12세 이상"
+                    details.details.grade?.contains("중학생") == true -> "12세 이상"
+                    details.details.grade?.contains("12세") == true -> "12세 이상"
+                    details.details.grade?.contains("15세") == true -> "15세 이상"
+                    details.details.grade?.contains("18세") == true -> "19세 이상"
+                    details.details.grade?.contains("청소년") == true -> "19세 이상"
+                    details.details.grade?.contains("연소자관람가") == true -> "전체"
+                    details.details.grade?.contains("연소자관람불가") == true -> "19세 이상"
+                    details.details.grade?.contains("연소자불가") == true -> "19세 이상"
+                    details.details.grade?.contains("모든") == true -> "전체"
+                    else -> details.details.grade
                 }
-                binding.txtPlot.text = details.plot ?: "줄거리 정보가 없습니다."
+                binding.txtPlot.text = details.details.plot?.replace(Regex("(?<!\\.)\\.(?!\\.)\\s*(?=\\S)"), ". ") ?: "줄거리 정보가 없습니다."
 
-                if (details.posterUrl.isNullOrEmpty()) {
+                if (details.details.posterUrl.isNullOrEmpty()) {
                     binding.imgPoster.visibility = View.GONE
                 } else {
                     binding.imgPoster.visibility = View.VISIBLE
-                    Glide.with(binding.root).load(details.posterUrl).centerCrop().into(binding.imgPoster)
+                    Glide.with(binding.root).load(details.details.posterUrl).centerCrop().into(binding.imgPoster)
                 }
 
-                if (details.genres.isNotEmpty()) {
+                if (details.details.genres.isNotEmpty()) {
                     binding.recyclerView.visibility = View.VISIBLE
-                    genreAdapter.setItemList(details.genres)
+                    genreAdapter.setItemList(details.details.genres)
                 } else {
                     binding.recyclerView.visibility = View.GONE
+                }
+
+                if (details.trend.isNotEmpty()) {
+                    binding.audiCount.visibility = View.VISIBLE
+                    binding.barChart.visibility = View.VISIBLE
+                    binding.audiAccu.visibility = View.VISIBLE
+                    binding.lineChart.visibility = View.VISIBLE
+
+                    val audiCount = details.trend.reversed().map { audi ->
+                        convertDate(audi.date, "yyyy-MM-dd", "MM.dd", Locale.KOREA) to audi.audiCount.toFloat()
+                    }
+
+                    val missingAudiCount = 7 - audiCount.size
+                    val missingAudi = List(missingAudiCount) { "" to 0f }
+
+                    val audiCountData = audiCount + missingAudi
+                    binding.barChart.show(audiCountData)
+
+                    val audiAccu = details.trend.reversed().map { audi ->
+                        convertDate(audi.date, "yyyy-MM-dd", "MM.dd", Locale.KOREA) to audi.audiAccumulate.toFloat()
+                    }
+
+                    if (audiAccu.size <= 1) {
+                        binding.audiAccu.visibility = View.GONE
+                        binding.lineChart.visibility = View.GONE
+                    } else {
+                        binding.lineChart.show(audiAccu)
+                    }
+                } else {
+                    binding.audiCount.visibility = View.GONE
+                    binding.barChart.visibility = View.GONE
+                    binding.audiAccu.visibility = View.GONE
+                    binding.lineChart.visibility = View.GONE
                 }
             }
         }

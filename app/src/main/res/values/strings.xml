@@ -6,6 +6,8 @@
     <string name="str_details_nation">국가</string>
     <string name="str_details_grade">등급</string>
     <string name="str_details_plot">영화 소개</string>
+    <string name="str_details_audi_count">일일 관객수</string>
+    <string name="str_details_audi_accu">누적 관객수</string>
 
     <!--fragment_home.xml-->
     <string name="str_home_release_recent">최근 개봉</string>

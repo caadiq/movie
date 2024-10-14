@@ -46,7 +46,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtTitle"
@@ -97,6 +98,7 @@
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
+                android:overScrollMode="never"
                 android:paddingHorizontal="32dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,23 +107,9 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/row_genre" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.35" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.65" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/runTime"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
@@ -129,29 +117,33 @@
                 android:text="@string/str_details_runtime"
                 android:textColor="@color/gray"
                 android:textSize="15dp"
+                app:layout_constraintEnd_toStartOf="@+id/nation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/nation"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanum_square_neo_regular"
                 android:text="@string/str_details_nation"
                 android:textColor="@color/gray"
                 android:textSize="15dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintEnd_toStartOf="@+id/grade"
+                app:layout_constraintStart_toEndOf="@+id/runTime"
                 app:layout_constraintTop_toTopOf="@+id/runTime" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/grade"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
                 android:fontFamily="@font/nanum_square_neo_regular"
                 android:text="@string/str_details_grade"
                 android:textColor="@color/gray"
                 android:textSize="15dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nation"
                 app:layout_constraintTop_toTopOf="@+id/runTime" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -162,7 +154,7 @@
                 android:fontFamily="@font/nanum_square_neo_bold"
                 android:textColor="@color/lighter_gray"
                 android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/guideline1"
+                app:layout_constraintEnd_toEndOf="@+id/runTime"
                 app:layout_constraintStart_toStartOf="@+id/runTime"
                 app:layout_constraintTop_toBottomOf="@+id/runTime"
                 tools:text="118분" />
@@ -175,7 +167,7 @@
                 android:fontFamily="@font/nanum_square_neo_bold"
                 android:textColor="@color/lighter_gray"
                 android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="@+id/nation"
                 app:layout_constraintStart_toStartOf="@+id/nation"
                 app:layout_constraintTop_toTopOf="@+id/txtRunTime"
                 tools:text="대한민국" />
@@ -189,7 +181,7 @@
                 android:textColor="@color/lighter_gray"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/grade"
                 app:layout_constraintTop_toTopOf="@+id/txtRunTime"
                 tools:text="15세 이상" />
 
@@ -211,13 +203,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
                 android:fontFamily="@font/nanum_square_neo_regular"
                 android:justificationMode="none"
                 android:lineSpacingExtra="12dp"
                 android:textColor="@color/lighter_gray"
                 android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/plot"
@@ -225,6 +215,62 @@
                 app:readMoreMaxLine="4"
                 app:readMoreText=" …더보기"
                 tools:text="가족들도 못 챙기고 밤낮 없이 범죄들과 싸우는 베테랑 형사 '서도철'(황정민)과 강력범죄수사대 형사들.어느 날, 한 교수의 죽음이 이전에 발생했던 살인 사건들과 연관성이 있는 것으로 밝혀지며 전국은 연쇄살인범으로 인해 떠들썩해진다. 이에 단서를 추적하며 수사를 시작한 형사들. 하지만 이들을 비웃기라도 하듯, 연쇄살인범은 다음 살인 대상을 지목하는 예고편을 인터넷에 공개하며 또 한 번 전 국민을 흔들어 놓는다.강력범죄수사대는 서도철의 눈에 든 정의감 넘치는 막내 형사 '박선우' (정해인)를 투입한다. 그리고 사건은 새로운 방향으로 흐르게 되는데..." />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/audiCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/nanum_square_neo_bold"
+                android:text="@string/str_details_audi_count"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/runTime"
+                app:layout_constraintTop_toBottomOf="@+id/txtPlot" />
+
+            <com.db.williamchart.view.BarChartView
+                android:id="@+id/barChart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                app:chart_axis="x"
+                app:chart_barsColor="@color/crimson_red"
+                app:chart_barsRadius="8dp"
+                app:chart_labelsColor="@color/gray"
+                app:chart_spacing="8dp"
+                app:layout_constraintDimensionRatio="H, 3:2"
+                app:layout_constraintEnd_toEndOf="@+id/txtPlot"
+                app:layout_constraintStart_toStartOf="@+id/txtPlot"
+                app:layout_constraintTop_toBottomOf="@+id/audiCount" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/audiAccu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nanum_square_neo_bold"
+                android:text="@string/str_details_audi_accu"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/runTime"
+                app:layout_constraintTop_toBottomOf="@+id/barChart" />
+
+            <com.db.williamchart.view.LineChartView
+                android:id="@+id/lineChart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:chart_axis="x"
+                app:chart_labelsColor="@color/gray"
+                app:chart_lineColor="@color/crimson_red"
+                app:chart_lineThickness="8dp"
+                app:chart_smoothLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H, 3:2"
+                app:layout_constraintEnd_toEndOf="@+id/txtPlot"
+                app:layout_constraintStart_toStartOf="@+id/txtPlot"
+                app:layout_constraintTop_toBottomOf="@+id/audiAccu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

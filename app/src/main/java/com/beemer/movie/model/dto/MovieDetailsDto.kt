@@ -1,6 +1,11 @@
 package com.beemer.movie.model.dto
 
 class MovieDetailsDto(
+    val details: Details,
+    val trend: List<Trend>
+)
+
+data class Details(
     val movieCode: String,
     val movieName: String,
     val movieNameEn: String?,
@@ -11,4 +16,13 @@ class MovieDetailsDto(
     val nation: String?,
     val grade: String?,
     val plot: String?
+)
+
+data class Trend(
+    val date: String,
+    val rank: Int,
+    val rankIncrement: Int,
+    val audiCount: Int,
+    val audiChangeRate: Float,
+    val audiAccumulate: Int
 )

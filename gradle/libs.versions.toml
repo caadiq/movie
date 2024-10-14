@@ -28,6 +28,7 @@ glideTransformations = "4.3.0"
 dotsIndicator = "5.0"
 lottie = "5.2.0"
 readMore = "1.0.0"
+williamchart = "3.11.0"
 
 
 [libraries]
@@ -64,6 +65,9 @@ glide-transformations = { group = "jp.wasabeef", name = "glide-transformations",
 dotsIndicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 readMore = { group = "kr.co.prnd", name = "readmore-textview", version.ref = "readMore" }
+williamchart = { group = "com.diogobernardino", name = "williamchart", version.ref = "williamchart" }
+williamchart-tooltip-slider = { group = "com.diogobernardino.williamchart", name = "tooltip-slider", version.ref = "williamchart" }
+williamchart-tooltip-points = { group = "com.diogobernardino.williamchart", name = "tooltip-points", version.ref = "williamchart" }
 
 
 [plugins]
