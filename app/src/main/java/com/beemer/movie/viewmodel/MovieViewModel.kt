@@ -8,7 +8,7 @@ import com.beemer.movie.model.dto.MovieDetailsDto
 import com.beemer.movie.model.dto.PageDto
 import com.beemer.movie.model.dto.PosterBannerDto
 import com.beemer.movie.model.dto.RankListDto
-import com.beemer.movie.model.dto.ReleaseListDto
+import com.beemer.movie.model.dto.ReleaseList
 import com.beemer.movie.model.dto.SearchList
 import com.beemer.movie.model.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,11 +26,14 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
     private val _weeklyRankList = MutableLiveData<RankListDto>()
     val weeklyRankList: LiveData<RankListDto> = _weeklyRankList
 
-    private val _recentReleaseList = MutableLiveData<List<ReleaseListDto>>()
-    val recentReleaseList: LiveData<List<ReleaseListDto>> = _recentReleaseList
+    private val _recentReleaseList = MutableLiveData<List<ReleaseList>>()
+    val recentReleaseList: LiveData<List<ReleaseList>> = _recentReleaseList
 
-    private val _comingReleaseList = MutableLiveData<List<ReleaseListDto>>()
-    val comingReleaseList: LiveData<List<ReleaseListDto>> = _comingReleaseList
+    private val _comingReleaseList = MutableLiveData<List<ReleaseList>>()
+    val comingReleaseList: LiveData<List<ReleaseList>> = _comingReleaseList
+
+    private val _releaseList = MutableLiveData<List<ReleaseList>>()
+    val releaseList: LiveData<List<ReleaseList>> = _releaseList
 
     private val _searchList = MutableLiveData<List<SearchList>>()
     val searchList: LiveData<List<SearchList>> = _searchList
@@ -65,15 +68,32 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
         }
     }
 
-    fun getRecentReleaseList(limit: Int) {
+    fun getRecentReleaseList() {
         viewModelScope.launch {
-            _recentReleaseList.value = repository.getRecentReleaseList(limit)
+            _recentReleaseList.value = repository.getRecentReleaseList()?.movies
         }
     }
 
-    fun getComingReleaseList(limit: Int) {
+    fun getComingReleaseList() {
         viewModelScope.launch {
-            _comingReleaseList.value = repository.getComingReleaseList(limit)
+            _comingReleaseList.value = repository.getComingReleaseList()?.movies
+        }
+    }
+
+    fun getReleaseList(page: Int?, limit: Int?, type: String, refresh: Boolean) {
+        viewModelScope.launch {
+            setLoading(true)
+            _isRefreshed.value = refresh
+
+            val response = repository.getReleaseList(page, limit, type)
+            _releaseList.postValue(
+                if (refresh)
+                    response?.movies ?: emptyList()
+                else
+                    _releaseList.value?.let { it + (response?.movies ?: emptyList()) }
+            )
+
+            _page.postValue(response?.page)
         }
     }
 

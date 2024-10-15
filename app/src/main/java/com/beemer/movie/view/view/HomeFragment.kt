@@ -79,8 +79,20 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             autoScrollJob?.cancel()
             movieViewModel.getPosterBanner()
-            movieViewModel.getRecentReleaseList(5)
-            movieViewModel.getComingReleaseList(5)
+            movieViewModel.getRecentReleaseList()
+            movieViewModel.getComingReleaseList()
+        }
+
+        binding.txtReleaseRecentAll.setOnClickListener {
+            val intent = Intent(requireContext(), ReleaseActivity::class.java)
+            intent.putExtra("type", "recent")
+            startActivity(intent)
+        }
+
+        binding.txtReleaseComingAll.setOnClickListener {
+            val intent = Intent(requireContext(), ReleaseActivity::class.java)
+            intent.putExtra("type", "coming")
+            startActivity(intent)
         }
     }
 
@@ -170,8 +182,8 @@ class HomeFragment : Fragment() {
 
         movieViewModel.apply {
             getPosterBanner()
-            getRecentReleaseList(5)
-            getComingReleaseList(5)
+            getRecentReleaseList()
+            getComingReleaseList()
 
             posterBanner.observe(viewLifecycleOwner) { list ->
                 homePosterAdapter.setItemList(list)

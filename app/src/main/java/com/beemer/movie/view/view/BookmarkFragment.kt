@@ -94,6 +94,7 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.OnMenuClickListener, Bookma
             adapter = bookmarkAdapter
             setHasFixedSize(true)
         }
+        
         viewLifecycleOwner.lifecycleScope.launch {
             bookmarkAdapter.loadStateFlow.collect {
                 if (it.append is LoadState.NotLoading) {

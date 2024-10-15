@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".view.view.SearchActivity" />
         <activity android:name=".view.view.DetailsActivity" />
+        <activity android:name=".view.view.ReleaseActivity" />
     </application>
 
 </manifest>

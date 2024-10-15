@@ -14,9 +14,11 @@ class MovieRepository @Inject constructor(retrofit: Retrofit) {
 
     suspend fun getWeeklyRankList(startDate: String, endDate: String) = movieApi.getWeeklyRankList(startDate, endDate).awaitResponse().body()
 
-    suspend fun getRecentReleaseList(limit: Int) = movieApi.getRecentReleaseList(limit).awaitResponse().body() ?: emptyList()
+    suspend fun getReleaseList(page: Int?, limit: Int?, type: String) = movieApi.getReleaseList(page, limit, type).awaitResponse().body()
 
-    suspend fun getComingReleaseList(limit: Int) = movieApi.getComingReleaseList(limit).awaitResponse().body() ?: emptyList()
+    suspend fun getRecentReleaseList() = movieApi.getReleaseList(0, 5, "recent").awaitResponse().body()
+
+    suspend fun getComingReleaseList() = movieApi.getReleaseList(0, 5, "coming").awaitResponse().body()
 
     suspend fun getSearchList(page: Int?, limit: Int?, query: String) = movieApi.getSearchList(page, limit, query).awaitResponse().body()
 

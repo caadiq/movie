@@ -2,6 +2,7 @@ package com.beemer.movie.model.dto
 
 data class SearchListDto(
     val page: PageDto,
+    val count: CountDto,
     val movies: List<SearchList>
 )
 

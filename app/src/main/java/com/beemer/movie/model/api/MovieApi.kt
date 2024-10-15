@@ -20,11 +20,8 @@ interface MovieApi {
     @GET("/api/movie/rank/weekly")
     fun getWeeklyRankList(@Query("startDate") startDate: String, @Query("endDate") endDate: String): Call<RankListDto>
 
-    @GET("/api/movie/release/recent")
-    fun getRecentReleaseList(@Query("limit") limit: Int): Call<List<ReleaseListDto>>
-
-    @GET("/api/movie/release/coming")
-    fun getComingReleaseList(@Query("limit") limit: Int): Call<List<ReleaseListDto>>
+    @GET("/api/movie/release")
+    fun getReleaseList(@Query("page") page: Int?, @Query("limit") limit: Int?, @Query("type") type: String): Call<ReleaseListDto>
 
     @GET("/api/movie/search")
     fun getSearchList(@Query("page") page: Int?, @Query("limit") limit: Int?, @Query("query") query: String): Call<SearchListDto>

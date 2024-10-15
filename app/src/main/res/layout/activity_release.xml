@@ -6,22 +6,14 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtSearch"
+        android:id="@+id/txtTitle"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectangle_lightnavy_rounded_28dp_ripple"
-        android:drawablePadding="16dp"
-        android:drawableTint="@color/white"
+        android:layout_height="?attr/actionBarSize"
         android:fontFamily="@font/nanum_square_round_bold"
-        android:gravity="center_vertical"
-        android:letterSpacing="0.1"
-        android:paddingHorizontal="16dp"
-        android:text="@string/str_search_hint"
-        android:textColor="@color/lavender_gray"
-        android:textSize="16dp"
-        app:drawableStartCompat="@drawable/icon_search"
+        android:gravity="center"
+        android:text="@string/str_bookmark_title"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,19 +22,26 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSearch">
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/row_search" />
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:itemCount="10"
+            tools:listitem="@layout/row_release" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -51,7 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanum_square_neo_bold"
-        android:text="@string/str_search_empty_list"
         android:textColor="@color/lighter_navy"
         android:textSize="18dp"
         android:visibility="gone"
@@ -60,5 +58,6 @@
         app:layout_constraintStart_toStartOf="@+id/swipeRefreshLayout"
         app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout"
         tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
