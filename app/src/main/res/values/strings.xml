@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">Movie</string>
+
+    <!--activity_details.xml-->
+    <string name="str_details_runtime">러닝타임</string>
+    <string name="str_details_nation">국가</string>
+    <string name="str_details_grade">등급</string>
+    <string name="str_details_plot">영화 소개</string>
+    <string name="str_details_audi_count">일일 관객수</string>
+    <string name="str_details_audi_accu">누적 관객수</string>
+
+    <!--fragment_home.xml-->
+    <string name="str_home_release_recent">최근 개봉</string>
+    <string name="str_home_release_coming">개봉 예정</string>
+    <string name="str_home_see_all">모두 보기</string>
+
+    <!--fragment_chart.xml-->
+    <string name="str_chart_daily">일간 순위</string>
+    <string name="str_chart_weekly">주간 순위</string>
+
+    <!--fragment_search.xml-->
+    <string name="str_search_hint">영화 제목 또는 장르로 검색</string>
+    <string name="str_search_empty_list">검색 결과가 없습니다.</string>
+
+    <!--fragment_bookmark.xml-->
+    <string name="str_bookmark_title">북마크</string>
+    <string name="str_bookmark_delete_all">모두 삭제</string>
+    <string name="str_bookmark_empty_list">추가한 북마크가 없습니다.</string>
+
+    <!--row_search_history.xml-->
+    <string name="str_search_recent">최근 검색</string>
+    <string name="str_search_delete_all">모두 지우기</string>
+
+    <!--row_bookmark_list.xml-->
+    <string name="str_bookmark_details">상세 정보</string>
+
+    <!--menu_bottom_navigation_view.xml-->
+    <string name="str_bottom_nav_home">홈</string>
+    <string name="str_bottom_nav_chart">순위</string>
+    <string name="str_bottom_nav_search">검색</string>
+    <string name="str_bottom_nav_bookmark">북마크</string>
+
+    <!--MainActivity.kt-->
+    <string name="str_main_press_back">뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.</string>
 </resources>

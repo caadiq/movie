@@ -1,9 +1,56 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Movie" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.Movie" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOutlineVariant">@color/colorOutlineVariant</item>
+        <item name="colorSurfaceContainer">@color/colorSurfaceContainer</item>
+
+        <item name="android:colorBackground">@color/deep_navy</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="android:statusBarColor">@color/deep_navy</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.Movie" parent="Base.Theme.Movie" />
+
+    <style name="Style.BottomNavigationView.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <style name="Style.TabLayout" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/nanum_square_neo_bold</item>
+        <item name="android:fontFamily">@font/nanum_square_neo_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomRoundedBackgroundBottomSheet</item>
+    </style>
+
+    <style name="CustomRoundedBackgroundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_rounded_corner</item>
+    </style>
+
+    <style name="RoundedShapeAppearanceOverlay.4dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="RoundedShapeAppearanceOverlay.8dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="RoundedShapeAppearanceOverlay.20dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="32dp"
+    android:layout_marginEnd="12dp"
+    android:background="@drawable/rectangle_lighternavy_rounded_16dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/nanum_square_neo_bold"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/deep_navy"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="액션" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

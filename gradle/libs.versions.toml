@@ -1,26 +1,78 @@
 [versions]
-agp = "8.6.0"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
+# 플러그인
+agp = "8.6.1"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.25"
+
+# 라이브러리
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+
+coreKtx = "1.13.1"
 appcompat = "1.7.0"
-material = "1.12.0"
-activity = "1.9.1"
 constraintlayout = "2.1.4"
+swipeRefreshLayout = "1.1.0"
+room = "2.6.1"
+paging3 = "3.3.2"
+
+material = "1.12.0"
+flexbox = "3.0.0"
+
+hilt = "2.52"
+hiltX = "1.2.0"
+
+retrofit = "2.11.0"
+glide = "4.16.0"
+glideTransformations = "4.3.0"
+dotsIndicator = "5.0"
+lottie = "5.2.0"
+readMore = "1.0.0"
+williamchart = "3.11.0"
+
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+# 테스트
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# androidx
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-swipeRefreshLayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefreshLayout" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging3" }
+
+# google
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
+
+# hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hiltX" }
+
+# 기타
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-transformations = { group = "jp.wasabeef", name = "glide-transformations", version.ref = "glideTransformations" }
+dotsIndicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+readMore = { group = "kr.co.prnd", name = "readmore-textview", version.ref = "readMore" }
+williamchart = { group = "com.diogobernardino", name = "williamchart", version.ref = "williamchart" }
+williamchart-tooltip-slider = { group = "com.diogobernardino.williamchart", name = "tooltip-slider", version.ref = "williamchart" }
+williamchart-tooltip-points = { group = "com.diogobernardino.williamchart", name = "tooltip-points", version.ref = "williamchart" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
