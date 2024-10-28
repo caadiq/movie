@@ -16,7 +16,7 @@ data class RankList(
     val movieName: String,
     val genre: String,
     val posterUrl: String,
-    val openDate: String,
+    val openDate: String?,
     val rank: Int,
     val rankIncrement: Int,
     val audiCount: Int,

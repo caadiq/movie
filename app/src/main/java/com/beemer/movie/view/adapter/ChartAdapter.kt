@@ -68,7 +68,7 @@ class ChartAdapter : RecyclerView.Adapter<ChartAdapter.ViewHolder>() {
             binding.txtRank.text = item.rank.toString()
             binding.txtTitle.text = item.movieName
             binding.txtGenre.text = item.genre
-            binding.txtOpenDate.text = convertDate(item.openDate, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA)
+            item.openDate?.let { binding.txtOpenDate.text = convertDate(it, "yyyy-MM-dd", "yyyy.MM.dd", Locale.KOREA) }
 
             when {
                 item.rankIncrement > 0 -> {
